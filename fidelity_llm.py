@@ -17,6 +17,9 @@ the largest period both comparison runs have completed):
 
 Usage:
   python fidelity_llm.py [--horizon N]
+
+
+Paper mapping: the pilot panel table of Section 3 (source vs seeded vs unseeded control).
 """
 import argparse
 import collections

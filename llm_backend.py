@@ -5,6 +5,9 @@ backend-blind. Swapping Qwen for Claude later means adding a backend
 class and a pricing entry; nothing else changes. Transcripts cache to
 disk keyed by (model, prompt) so identical calls are free and replay
 is deterministic regardless of backend stochasticity.
+
+
+Paper mapping: the cached model connection behind the reproducibility statements of Section 10.
 """
 import fcntl
 import hashlib

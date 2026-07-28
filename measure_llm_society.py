@@ -17,6 +17,9 @@ and revealed practice; never its capabilities or private knowledge:
 
 Usage:
   python measure_llm_society.py runs/<name>/log.jsonl out_seed.json [burn_in]
+
+
+Paper mapping: society measurements feeding Sections 3 and 4.
 """
 import collections
 import json

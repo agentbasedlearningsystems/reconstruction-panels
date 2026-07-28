@@ -35,6 +35,9 @@ does not hang on that choice.
 
 Usage:
   python analysis_instruments.py [run ...]      (default: the LLM cohort)
+
+
+Paper mapping: the declared tests of Sections 3 and 4, fixed before the data existed.
 """
 import collections
 import glob
