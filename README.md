@@ -68,3 +68,27 @@ A 25-period society takes several hours on an ordinary machine, most
 of it waiting on model calls; the response cache makes any repeat of
 the same society near-free and byte-identical. Corpus data carries
 its own license notes beside each corpus directory.
+
+## Free confirmation, priced replication
+
+Agent turns are billed model calls, so we state checking economics
+plainly.
+
+1. CONFIRMATION (free, no API key). `GCON_OFFLINE=1` runs any society
+   replay entirely from the shipped transcript packs (with the
+   supplementary material): builds retrain locally, deliveries
+   re-score on held-out data, the market re-clears, and the run
+   matches the published logs. A prompt outside the pack raises a
+   clear error instead of placing a model call, so you cannot be
+   billed. This confirms that every reported number follows from the
+   recorded interactions; it re-samples nothing.
+2. ANALYSIS (free). Every figure and table regenerates from shipped
+   logs by a listed command.
+3. REPLICATION (priced): fresh societies with your own key cost, at
+   list prices, about $3 (single mind), $5 (first-world market
+   society), up to about $15 (thirty-day locality society). The
+   evolutionary substrate has no model bill at all.
+
+Pack building for authors: `python3 instruments/make_cache_pack.py
+--out packs/NAME.tgz -- <replay command>`; reviewers unpack into
+`transcripts/` and run the same command with `GCON_OFFLINE=1`.

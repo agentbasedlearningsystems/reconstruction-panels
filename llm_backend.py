@@ -71,6 +71,16 @@ class ClaudeAPI:
         return vals
 
     def __init__(self, model='claude-haiku-4-5', cap_usd=None, temperature=0.0):
+        # GCON_OFFLINE=1: replay-only mode for reviewers. No client is
+        # constructed, no key is read, and any cache miss raises instead
+        # of billing. Zero-cost confirmation depends on this refusing.
+        if os.environ.get('GCON_OFFLINE'):
+            self._client = None
+            self.model = model
+            self.name = model
+            self.cap = 0.0
+            self.temperature = temperature
+            return
         import anthropic
         # Key + cap resolution: env var, then the setup script's .env files,
         # then the raw keyfile. Explicit sources only; no ambient profiles.
@@ -205,6 +215,10 @@ def generate(backend, prompt, max_tokens=1400, tag='', system_prefix=None):
         (backend.name + '\x00' + tag + '\x00' + (system_prefix or '')
          + '\x00' + prompt).encode()).hexdigest()[:24]
     path = os.path.join(CACHE_DIR, key + '.json')
+    trace = os.environ.get('GCON_CACHE_TRACE')
+    if trace:
+        with open(trace, 'a') as tf:
+            tf.write(key + '\n')
     if os.path.exists(path):
         try:
             d = json.load(open(path))
@@ -214,6 +228,11 @@ def generate(backend, prompt, max_tokens=1400, tag='', system_prefix=None):
             # empty/truncated cache entry (e.g. VM died mid-write): drop it
             try: os.remove(path)
             except OSError: pass
+    if getattr(backend, '_client', True) is None:
+        raise RuntimeError(
+            'GCON_OFFLINE replay: cache miss for key %s. Refusing to '
+            'place a model call. The replay pack does not cover this '
+            'prompt; no money was spent.' % key)
     t0 = time.time()
     try:
         text, tin, tout = backend(prompt, max_tokens,
