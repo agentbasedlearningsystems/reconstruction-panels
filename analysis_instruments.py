@@ -15,7 +15,7 @@ Equity" (IJCAI-19 AI4SG workshop). Cite that paper in any caption.
                     delivery of that agent that a tester scored, sold or
                     not (best-score variant reported alongside).
   talent-adjusted   the Gini coefficient of the equitable share
-  Gini              Wa = Va / goodness_a — wealth that strays from the
+  Gini              Wa = Va / goodness_a; wealth that strays from the
                     agent's contribution in quality. High = trade is
                     unrelated to talent.
   security-Pearson  the correlation between income and goodness weighted
@@ -23,7 +23,7 @@ Equity" (IJCAI-19 AI4SG workshop). Cite that paper in any caption.
                     ones that deserve to be low?
   equity-Pearson    the same correlation weighted toward HIGH earners: is
                     the top of the market the part that earned it?
-  utility           the mean accepted score — how satisfied the buyer is
+  utility           the mean accepted score; how satisfied the buyer is
                     with what it actually bought.
 
 One definitional choice is mine and is flagged for the designer: the paper

@@ -1,6 +1,6 @@
 """Model-agnostic generation seam with a transcript cache.
 
-Everything above generate() — prompts, sandbox, ledger, market — is
+Everything above generate(); prompts, sandbox, ledger, market; is
 backend-blind. Swapping Qwen for Claude later means adding a backend
 class and a pricing entry; nothing else changes. Transcripts cache to
 disk keyed by (model, prompt) so identical calls are free and replay
@@ -40,7 +40,7 @@ class ClaudeAPI:
     """Claude backend with a hard dollar cap.
 
     Key resolution is EXPLICIT only (env ANTHROPIC_API_KEY or the file
-    ~/.config/anthropic/llm_market_key) — no ambient profile fallback, so
+    ~/.config/anthropic/llm_market_key); no ambient profile fallback, so
     nothing bills to an account the designer didn't deliberately provide.
     Every call appends to spend.json; at the cap, calls raise before
     sending. Prices are list $/MTok (input, output).
@@ -70,7 +70,7 @@ class ClaudeAPI:
     def __init__(self, model='claude-haiku-4-5', cap_usd=None, temperature=0.0):
         import anthropic
         # Key + cap resolution: env var, then the setup script's .env files,
-        # then the raw keyfile. Explicit sources only — no ambient profiles.
+        # then the raw keyfile. Explicit sources only; no ambient profiles.
         merged = {}
         for p in (os.path.join(HERE, '.env'),
                   os.path.expanduser('~/.config/anthropic/env')):
@@ -152,7 +152,7 @@ class ClaudeAPI:
                     prev = -1
             if step > prev:
                 print(f'BUDGET CAP EXCEEDED: ${spent:.2f} spent >= '
-                      f'${self.cap:.2f} cap — continuing per the designer '
+                      f'${self.cap:.2f} cap; continuing per the designer '
                       f'2026-07-16; telling, not stopping.', flush=True)
                 with open(flag, 'w') as f:
                     f.write(str(step))
@@ -179,7 +179,7 @@ class ClaudeAPI:
                 retriable = status in (429, 500, 502, 503, 529) or status is None
                 if not retriable or attempt == 13:
                     raise
-                print(f'API {status or "connection"} error — retry '
+                print(f'API {status or "connection"} error; retry '
                       f'{attempt + 1}/13 in {delay:.0f}s', flush=True)
                 time.sleep(delay)
                 delay = min(delay * 2, 180.0)

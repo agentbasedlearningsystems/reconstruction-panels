@@ -2,8 +2,8 @@
 
 The LLM-substrate half of coevolutionary reconstruction (the CMA-ES
 half is scripts/measure_proportions.py in the simulation repo). What is
-measured and seeded is the society's CONVENTIONS — the role geography
-and revealed practice — never its capabilities or private knowledge:
+measured and seeded is the society's CONVENTIONS; the role geography
+and revealed practice; never its capabilities or private knowledge:
 
   positions       each agent's settled sign/seeking vectors, weighted
                   toward the periods in which it actually earned (who
@@ -11,7 +11,7 @@ and revealed practice — never its capabilities or private knowledge:
   want_practice   per want: settled-delivery approach-signature shares
                   (the society's revealed practice per demand)
   hiring          agent-to-agent settles per period (carried as data,
-                  reported, and NOT injected into the seed prompt —
+                  reported, and NOT injected into the seed prompt;
                   mirroring the CMA-ES protocol where combinations are
                   carried as data only and never bias generation)
 

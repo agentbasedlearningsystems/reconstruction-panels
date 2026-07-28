@@ -4,7 +4,7 @@ control (e7c) against the source (e6), at a matched horizon.
 Measures, all computed from logs through --horizon periods (default:
 the largest period both comparison runs have completed):
   capture structure   per want: which positions sell, and the
-                      concentration (top seller share) — does the
+                      concentration (top seller share); does the
                       specialist structure regrow?
   positional          for each want, cosine between the seeded run's
   correspondence      top seller position and the source run's top
